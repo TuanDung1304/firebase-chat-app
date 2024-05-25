@@ -58,6 +58,19 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     gap: 20,
+
+    '&::-webkit-scrollbar': {
+      width: 12,
+    },
+    '&::-webkit-scrollbar-track': {
+      borderRadius: 8,
+      backgroundColor: '#95a5a6',
+      border: '1px solid #cacaca',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: 8,
+      backgroundColor: '#2c3e50',
+    },
   },
   bottom: {
     // marginTop: 'auto',

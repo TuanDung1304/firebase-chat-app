@@ -1,21 +1,28 @@
 import { makeStyles } from '@mui/styles'
+import DetailItem from './DetailItem'
+import SharedPhotos from './SharedPhotos'
 
 const useStyles = makeStyles(() => ({
   detail: {
     flex: 1,
     color: 'white',
+    maxHeight: '100%',
+    overflowY: 'auto',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
   },
   user: {
     padding: '30px 20px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: 15,
+    gap: 12,
     borderBottom: '1px solid #dddddd35',
 
     '& img': {
-      width: 100,
-      height: 100,
+      width: 80,
+      height: 80,
       borderRadius: '50%',
       objectFit: 'cover',
     },
@@ -25,61 +32,6 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     gap: 25,
-  },
-  option: {},
-  title: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-
-    '& img': {
-      width: 30,
-      height: 30,
-      backgroundColor: 'rgba(17, 25, 40, 0.3)',
-      padding: 10,
-      borderRadius: '50%',
-      cursor: 'pointer',
-    },
-
-    '& span': {
-      fontSize: 14,
-      color: 'lightgray',
-      fontWeight: 300,
-    },
-  },
-  photos: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 20,
-  },
-  photoItem: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  photoDetail: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 20,
-    '& span': {
-      fontSize: 14,
-      color: 'lightgray',
-      fontWeight: 300,
-    },
-    '& img': {
-      width: 40,
-      height: 40,
-      borderRadius: 5,
-      objectFit: 'cover',
-    },
-  },
-  downloadIcon: {
-    width: 30,
-    height: 30,
-    backgroundColor: 'rgba(17, 25, 40, 0.3)',
-    padding: 10,
-    borderRadius: '50%',
-    cursor: 'pointer',
   },
   button: {
     padding: 15,
@@ -100,7 +52,11 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-export default function Detail() {
+interface Props {
+  setUser: (value: boolean) => void
+}
+
+export default function Detail({ setUser }: Props) {
   const classes = useStyles()
 
   return (
@@ -111,79 +67,17 @@ export default function Detail() {
         <p>Anh yeu em nhieu chi mong em se hieu</p>
       </div>
       <div className={classes.info}>
-        <div className={classes.option}>
-          <div className={classes.title}>
-            <span>Chat Settings</span>
-            <img src="./arrowUp.png" alt="" />
-          </div>
-        </div>
+        <DetailItem label="Chat Settings" />
+        <DetailItem label="Privacy & Help" />
+        <DetailItem label="Shared Photos" content={SharedPhotos} />
+        <DetailItem label="Shared Files" />
 
-        <div className={classes.option}>
-          <div className={classes.title}>
-            <span>Privacy & Help</span>
-            <img src="./arrowUp.png" alt="" />
-          </div>
-        </div>
-
-        <div className={classes.option}>
-          <div className={classes.title}>
-            <span>Shared Photos</span>
-            <img src="./arrowUp.png" alt="" />
-          </div>
-          <div className={classes.photos}>
-            <div className={classes.photoItem}>
-              <div className={classes.photoDetail}>
-                <img
-                  src="https://www.state.gov/wp-content/uploads/2023/04/shutterstock_1263201358-2280x1282.jpg"
-                  alt=""
-                />
-                <span>photo_2024.png</span>
-              </div>
-              <img
-                src="./download.png"
-                alt=""
-                className={classes.downloadIcon}
-              />
-            </div>
-            <div className={classes.photoItem}>
-              <div className={classes.photoDetail}>
-                <img
-                  src="https://www.state.gov/wp-content/uploads/2023/04/shutterstock_1263201358-2280x1282.jpg"
-                  alt=""
-                />
-                <span>photo_2024.png</span>
-              </div>
-              <img
-                src="./download.png"
-                alt=""
-                className={classes.downloadIcon}
-              />
-            </div>
-            <div className={classes.photoItem}>
-              <div className={classes.photoDetail}>
-                <img
-                  src="https://www.state.gov/wp-content/uploads/2023/04/shutterstock_1263201358-2280x1282.jpg"
-                  alt=""
-                />
-                <span>photo_2024.png</span>
-              </div>
-              <img
-                src="./download.png"
-                alt=""
-                className={classes.downloadIcon}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className={classes.option}>
-          <div className={classes.title}>
-            <span>Shared Files</span>
-            <img src="./arrowUp.png" alt="" />
-          </div>
-        </div>
         <button className={classes.button}>Block User</button>
-        <button className={`${classes.button} logout`}>Logout</button>
+        <button
+          className={`${classes.button} logout`}
+          onClick={() => setUser(false)}>
+          Logout
+        </button>
       </div>
     </div>
   )

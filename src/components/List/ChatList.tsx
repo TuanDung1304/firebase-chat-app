@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { makeStyles } from '@mui/styles'
+import AddUserDialog from './AddUserDialog'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -92,6 +93,7 @@ export default function ChatList() {
           src={addMode ? './minus.png' : './plus.png'}
           onClick={() => setAddMode((prev) => !prev)}
         />
+        <AddUserDialog open={addMode} onClose={() => setAddMode(false)} />
       </div>
 
       <div className={classes.item}>
